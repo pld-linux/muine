@@ -7,12 +7,12 @@
 Summary:	Music player for GNOME
 Summary(pl):	Odtwarzacz muzyczny dla GNOME
 Name:		muine
-Version:	0.6.0
+Version:	0.6.1
 Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://muine.gooeylinux.org/%{name}-%{version}.tar.gz
-# Source0-md5:	cb1bef87070dfbddc6c824404d48c985
+# Source0-md5:	546273ac5bed3e3983bc56c1a8ff29af
 Patch0:		%{name}-locale-names.patch
 URL:		http://muine.gooeylinux.org/
 BuildRequires:	GConf2-devel
