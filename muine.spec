@@ -6,12 +6,12 @@ Summary:	Music player for GNOME
 Summary(pl):	Odtwarzacz muzyczny dla GNOME
 Name:		muine
 Version:	0.3.0
-Release:	0.%{_rel}.1
+Release:	0.1
 License:	GPL
 Group:		X11/Applications/Multimedia
-#Source0:	http://people.nl.linux.org/~jorn/Muine/%{name}-%{version}.tar.gz
-Source0:	http://people.nl.linux.org/~jorn/Muine/%{name}-%{version}-%{_rel}.tar.gz
-# Source0-md5:	d65fd4541b38f83c0ba1767c907e339b
+Source0:	http://people.nl.linux.org/~jorn/Muine/%{name}-%{version}.tar.gz
+# Source0-md5:	57e2d474378783198714c05219fd5376
+#Source0:	http://people.nl.linux.org/~jorn/Muine/%{name}-%{version}-%{_rel}.tar.gz
 URL:		http://people.nl.linux.org/~jorn/Muine/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -53,7 +53,8 @@ Muine jest odtwarzaczem muzycznym u¿ywaj±cym nowego typu UI
 na wzorze iTunes jak Rhythmbox i Jamboree.
 
 %prep
-%setup -qn %{name}-%{version}-%{_rel}
+#%setup -qn %{name}-%{version}-%{_rel}
+%setup -q
 
 %build
 cp %{_datadir}/automake/mkinstalldirs .
