@@ -14,7 +14,9 @@ Group:		X11/Applications/Multimedia
 Source0:	http://muine.gooeylinux.org/%{name}-%{version}.tar.gz
 # Source0-md5:	257aeff18be9d28dd1913f4c1f94df86
 Patch0:		%{name}-desktop.patch
+Patch1:		%{name}-locale-names.patch
 URL:		http://muine.gooeylinux.org/
+BuildRequires:	GConf2-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	flac-devel
@@ -27,16 +29,16 @@ BuildRequires:	gstreamer-GConf-devel >= %{min_ver}
 BuildRequires:	gstreamer-plugins-devel >= %{min_ver}
 %endif
 BuildRequires:	gtk+2-devel >= 2.0.4
-BuildRequires:	gtk-sharp-devel >= 0.17
+BuildRequires:	gtk-sharp-devel >= 0.18
 BuildRequires:	intltool >= 0.21
-BuildRequires:	libid3tag-devel
+BuildRequires:	libid3tag-devel >= 0.15
 BuildRequires:	libogg-devel
 BuildRequires:	libtool
 BuildRequires:	libvorbis-devel
-BuildRequires:	mono-devel >= 0.29
+BuildRequires:	mono-devel >= 0.30.1
 BuildRequires:	pkgconfig
 BuildRequires:	zlib-devel
-BuildRequires:	xine-lib-devel
+%{!?with_gstreamer:BuildRequires:	xine-lib-devel >= 1.0.0}
 Requires(post):	GConf2 >= 2.3.0
 Requires(post):	scrollkeeper
 %if %{with gstreamer}
@@ -47,9 +49,9 @@ Requires:	gstreamer-gnomevfs >= %{min_ver}
 # videobalance plugin is required!
 Requires:	gstreamer-video-effects >= %{min_ver}
 %endif
-Requires:	gtk-sharp >= 0.17
-Requires:	mono >= 0.29
-Requires:	xine-plugin-audio
+Requires:	gtk-sharp >= 0.18
+Requires:	mono >= 0.30.1
+%{!?with_gstreamer:Requires:	xine-plugin-audio}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -65,7 +67,10 @@ na wzorze iTunes jak Rhythmbox i Jamboree.
 
 %prep
 %setup -q
-%patch -p1
+%patch0 -p1
+%patch1 -p1
+
+mv po/{no,nb}.po
 
 %build
 cp %{_datadir}/automake/mkinstalldirs .
