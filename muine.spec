@@ -6,17 +6,16 @@ Summary:	Music player for GNOME
 Summary(pl):	Odtwarzacz muzyczny dla GNOME
 Name:		muine
 Version:	0.2.1
-Release:	0.%{snap}.1
+Release:	0.%{snap}.2
 License:	GPL
 Group:		X11/Applications/Multimedia
 #Source0:	http://people.nl.linux.org/~jorn/Muine/%{name}-%{version}.tar.gz
 Source0:	%{name}-%{version}-%{snap}.tar.bz2
 # Source0-md5:	1d2ad1a113c78782e5f25a115370212c
-Patch0:		%{name}-kill_debug.patch
 URL:		http://people.nl.linux.org/~jorn/Muine/
-%{?debug:BuildRequires:	gdbm-devel}
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	gdbm-devel
 BuildRequires:	gnome-common
 BuildRequires:	gnome-vfs2-devel >= 2.4.0
 BuildRequires:	gstreamer-devel >= %{min_ver}
@@ -55,7 +54,6 @@ na wzorze iTunes jak Rhythmbox i Jamboree.
 
 %prep
 %setup -q
-%{!?debug:%patch0 -p1}
 
 %build
 cp %{_datadir}/automake/mkinstalldirs .
@@ -67,7 +65,6 @@ intltoolize --copy --force
 %{__automake}
 %{__autoconf}
 %configure \
-	--enable-debug=%{?debug:yes}%{!?debug:no} \
 	--disable-static
 		
 %install
@@ -100,6 +97,6 @@ echo
 %{_sysconfdir}/gconf/schemas/*
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/muine
-%attr(755,root,root) %{_libdir}/muine
+%attr(755,root,root) %{_libdir}/muine/*
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
