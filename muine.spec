@@ -20,7 +20,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	flac-devel
 BuildRequires:	gdbm-devel
-BuildRequires:	gnome-common
+BuildRequires:	gnome-common >= 2.8.0
 BuildRequires:	gnome-vfs2-devel >= 2.4.0
 %if %{with gstreamer}
 BuildRequires:	gstreamer-devel >= %{min_ver}
@@ -76,7 +76,7 @@ cp /usr/share/automake/mkinstalldirs .
 glib-gettextize --copy --force
 intltoolize --copy --force
 %{__libtoolize}
-%{__aclocal} -I %{_aclocaldir}/gnome2-macros -I m4
+%{__aclocal} -I m4
 %{__autoheader}
 %{__automake}
 %{__autoconf}
