@@ -34,7 +34,7 @@ BuildRequires:	libid3tag-devel >= 0.15
 BuildRequires:	libogg-devel
 BuildRequires:	libtool
 BuildRequires:	libvorbis-devel
-BuildRequires:	mono-devel >= 0.96
+BuildRequires:	mono-csharp >= 0.96
 BuildRequires:	pkgconfig
 BuildRequires:	zlib-devel
 %{!?with_gstreamer:BuildRequires:	xine-lib-devel >= 1.0.0}
