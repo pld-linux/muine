@@ -5,12 +5,12 @@
 Summary:	Music player for GNOME
 Summary(pl):	Odtwarzacz muzyczny dla GNOME
 Name:		muine
-Version:	0.4.0
-Release:	2
+Version:	0.5.0
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://muine.gooeylinux.org/%{name}-%{version}.tar.gz
-# Source0-md5:	98273d70a6b83eeab2fdfb10819ce673
+# Source0-md5:	f620ad98de87c4cfa2e9298ef49b5e5e
 #Source0:	http://people.nl.linux.org/~jorn/Muine/%{name}-%{version}-%{_rel}.tar.gz
 URL:		http://muine.gooeylinux.org/
 BuildRequires:	autoconf
@@ -23,7 +23,7 @@ BuildRequires:	gstreamer-devel >= %{min_ver}
 BuildRequires:	gstreamer-GConf-devel >= %{min_ver}
 BuildRequires:	gstreamer-plugins-devel >= %{min_ver}
 BuildRequires:	gtk+2-devel >= 2.0.4
-BuildRequires:	gtk-sharp-devel >= 0.15
+BuildRequires:	gtk-sharp-devel >= 0.17
 BuildRequires:	intltool >= 0.21
 BuildRequires:	libid3tag-devel
 BuildRequires:	libogg-devel
@@ -38,7 +38,7 @@ Requires:	gstreamer-audio-effects >= %{min_ver}
 Requires:	gstreamer-audio-formats >= %{min_ver}
 Requires:	gstreamer-audiosink
 Requires:	gstreamer-gnomevfs >= %{min_ver}
-Requires:	gtk-sharp >= 0.15
+Requires:	gtk-sharp >= 0.17
 Requires:	mono >= 0.29
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -103,3 +103,4 @@ echo
 %{_datadir}/application-registry/*
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
+%{_datadir}/locale/*/LC_MESSAGES/muine.mo
