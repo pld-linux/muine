@@ -7,12 +7,12 @@
 Summary:	Music player for GNOME
 Summary(pl):	Odtwarzacz muzyczny dla GNOME
 Name:		muine
-Version:	0.6.1
+Version:	0.6.2
 Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://muine.gooeylinux.org/%{name}-%{version}.tar.gz
-# Source0-md5:	546273ac5bed3e3983bc56c1a8ff29af
+# Source0-md5:	c1efeb7b9f91f36ee060544f051c6c69
 Patch0:		%{name}-locale-names.patch
 URL:		http://muine.gooeylinux.org/
 BuildRequires:	GConf2-devel
@@ -28,13 +28,13 @@ BuildRequires:	gstreamer-GConf-devel >= %{min_ver}
 BuildRequires:	gstreamer-plugins-devel >= %{min_ver}
 %endif
 BuildRequires:	gtk+2-devel >= 2.0.4
-BuildRequires:	dotnet-gtk-devel >= 0.91.1
+BuildRequires:	dotnet-gtk-sharp-devel >= 0.93
 BuildRequires:	intltool >= 0.21
 BuildRequires:	libid3tag-devel >= 0.15
 BuildRequires:	libogg-devel
 BuildRequires:	libtool
 BuildRequires:	libvorbis-devel
-BuildRequires:	mono-devel >= 0.91
+BuildRequires:	mono-devel >= 0.95
 BuildRequires:	pkgconfig
 BuildRequires:	zlib-devel
 %{!?with_gstreamer:BuildRequires:	xine-lib-devel >= 1.0.0}
@@ -48,8 +48,8 @@ Requires:	gstreamer-gnomevfs >= %{min_ver}
 # videobalance plugin is required!
 Requires:	gstreamer-video-effects >= %{min_ver}
 %endif
-Requires:	dotnet-gtk >= 0.91.1
-Requires:	mono >= 0.91
+Requires:	dotnet-gtk-sharp >= 0.93
+Requires:	mono >= 0.95
 %{!?with_gstreamer:Requires:	xine-plugin-audio}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
