@@ -48,7 +48,7 @@ will be much easier and comfortable to use than the iTunes model,
 which is used by both Rhythmbox and Jamboree.
 
 %description -l pl
-Muine jest odwarzaczem muzycznym u¿ywaj±cym nowego typu UI
+Muine jest odtwarzaczem muzycznym u¿ywaj±cym nowego typu UI
 (interfejsu u¿ytkownika). Za³o¿eniem programu jest bycie o wiele
 ³atwiejszym i bardziej komfortowym  w u¿yciu ni¿ programy oparte
 na wzorze iTunes jak Rhythmbox i Jamboree.
