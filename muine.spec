@@ -13,8 +13,7 @@ License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://muine.gooeylinux.org/%{name}-%{version}.tar.gz
 # Source0-md5:	257aeff18be9d28dd1913f4c1f94df86
-Patch0:		%{name}-desktop.patch
-Patch1:		%{name}-locale-names.patch
+Patch0:		%{name}-locale-names.patch
 URL:		http://muine.gooeylinux.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf
@@ -68,7 +67,6 @@ na wzorze iTunes jak Rhythmbox i Jamboree.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 mv po/{no,nb}.po
 
