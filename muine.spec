@@ -1,17 +1,19 @@
 #
-%define		min_ver	0.6.0
-%define		_rel	pre1
+# Conditional build
+%bcond_with	gstreamer	# build with gstreamer instead xine-lib
+#
+%define		min_ver	0.8.0
 #
 Summary:	Music player for GNOME
 Summary(pl):	Odtwarzacz muzyczny dla GNOME
 Name:		muine
-Version:	0.5.0
-Release:	1
+Version:	0.5.1
+Release:	0.1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://muine.gooeylinux.org/%{name}-%{version}.tar.gz
-# Source0-md5:	f620ad98de87c4cfa2e9298ef49b5e5e
-#Source0:	http://people.nl.linux.org/~jorn/Muine/%{name}-%{version}-%{_rel}.tar.gz
+# Source0-md5:	257aeff18be9d28dd1913f4c1f94df86
+#Patch0:		%{name}-desktop.patch
 URL:		http://muine.gooeylinux.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -19,9 +21,11 @@ BuildRequires:	flac-devel
 BuildRequires:	gdbm-devel
 BuildRequires:	gnome-common
 BuildRequires:	gnome-vfs2-devel >= 2.4.0
+%if %{with gstreamer}
 BuildRequires:	gstreamer-devel >= %{min_ver}
 BuildRequires:	gstreamer-GConf-devel >= %{min_ver}
 BuildRequires:	gstreamer-plugins-devel >= %{min_ver}
+%endif
 BuildRequires:	gtk+2-devel >= 2.0.4
 BuildRequires:	gtk-sharp-devel >= 0.17
 BuildRequires:	intltool >= 0.21
@@ -32,14 +36,18 @@ BuildRequires:	libvorbis-devel
 BuildRequires:	mono-devel >= 0.29
 BuildRequires:	pkgconfig
 BuildRequires:	zlib-devel
+BuildRequires:	xine-lib-devel
 Requires(post):	GConf2 >= 2.3.0
 Requires(post):	scrollkeeper
+%if %{with gstreamer}
 Requires:	gstreamer-audio-effects >= %{min_ver}
 Requires:	gstreamer-audio-formats >= %{min_ver}
 Requires:	gstreamer-audiosink
 Requires:	gstreamer-gnomevfs >= %{min_ver}
+%endif
 Requires:	gtk-sharp >= 0.17
 Requires:	mono >= 0.29
+Requires:	xine-plugin-audio
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -55,6 +63,7 @@ na wzorze iTunes jak Rhythmbox i Jamboree.
 
 %prep
 %setup -q
+#%patch -p1
 
 %build
 cp %{_datadir}/automake/mkinstalldirs .
@@ -66,6 +75,7 @@ intltoolize --copy --force
 %{__automake}
 %{__autoconf}
 %configure \
+	%{?with_gstreamer:--enable-gstreamer=yes} \
 	--disable-static
 		
 %install
@@ -75,6 +85,8 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 
+%find_lang %{name} --with-gnome --all-name
+
 rm -f $RPM_BUILD_ROOT%{_libdir}/muine/*.la
 
 %clean
@@ -83,16 +95,24 @@ rm -rf $RPM_BUILD_ROOT
 %post
 %gconf_schema_install
 /usr/bin/scrollkeeper-update
+%if %{with gstreamer}
 echo
 echo "Remember to install appropriate gstreamer plugins for files"
 echo "you want to play:"
 echo "- gstreamer-mad (for mp3s)"
 echo "- gstreamer-vorbis (for Ogg Vorbis)"
+echo "- gstreamer-flac (for FLAC)"
 echo
+%else
+echo
+echo "Remember to install appropriate xine-decode plugins for files"
+echo "you want to play."
+echo
+%endif
 
 %postun -p /usr/bin/scrollkeeper-update
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README TODO
 %{_sysconfdir}/gconf/schemas/*
@@ -102,4 +122,4 @@ echo
 %{_datadir}/application-registry/*
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
-%{_datadir}/locale/*/LC_MESSAGES/muine.mo
+#%{_datadir}/locale/*/LC_MESSAGES/muine.mo
