@@ -34,10 +34,10 @@ BuildRequires:	pkgconfig
 BuildRequires:	zlib-devel
 Requires(post):	GConf2 >= 2.3.0
 Requires(post):	scrollkeeper
-Requires:       gstreamer-audio-effects >= %{min_ver}
-Requires:       gstreamer-audio-formats >= %{min_ver}
-Requires:       gstreamer-audiosink
-Requires:       gstreamer-gnomevfs >= %{min_ver}
+Requires:	gstreamer-audio-effects >= %{min_ver}
+Requires:	gstreamer-audio-formats >= %{min_ver}
+Requires:	gstreamer-audiosink
+Requires:	gstreamer-gnomevfs >= %{min_ver}
 Requires:	gtk-sharp >= 0.15
 Requires:	mono >= 0.29
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
