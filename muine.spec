@@ -8,12 +8,12 @@ Summary:	Music player for GNOME
 Summary(pl):	Odtwarzacz muzyczny dla GNOME
 Name:		muine
 Version:	0.5.1
-Release:	0.1
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://muine.gooeylinux.org/%{name}-%{version}.tar.gz
 # Source0-md5:	257aeff18be9d28dd1913f4c1f94df86
-#Patch0:		%{name}-desktop.patch
+Patch0:		%{name}-desktop.patch
 URL:		http://muine.gooeylinux.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -44,6 +44,8 @@ Requires:	gstreamer-audio-effects >= %{min_ver}
 Requires:	gstreamer-audio-formats >= %{min_ver}
 Requires:	gstreamer-audiosink
 Requires:	gstreamer-gnomevfs >= %{min_ver}
+# videobalance plugin is required!
+Requires:	gstreamer-video-effects >= %{min_ver}
 %endif
 Requires:	gtk-sharp >= 0.17
 Requires:	mono >= 0.29
@@ -63,7 +65,7 @@ na wzorze iTunes jak Rhythmbox i Jamboree.
 
 %prep
 %setup -q
-#%patch -p1
+%patch -p1
 
 %build
 cp %{_datadir}/automake/mkinstalldirs .
@@ -99,14 +101,16 @@ rm -rf $RPM_BUILD_ROOT
 echo
 echo "Remember to install appropriate gstreamer plugins for files"
 echo "you want to play:"
+echo "- gstreamer-flac (for FLAC)"
 echo "- gstreamer-mad (for mp3s)"
 echo "- gstreamer-vorbis (for Ogg Vorbis)"
-echo "- gstreamer-flac (for FLAC)"
 echo
 %else
 echo
 echo "Remember to install appropriate xine-decode plugins for files"
-echo "you want to play."
+echo "you want to play:"
+echo "- xine-decode-flac (for FLAC)"
+echo "- xine-decode-ogg (for Ogg Vorbis)"
 echo
 %endif
 
@@ -122,4 +126,3 @@ echo
 %{_datadir}/application-registry/*
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
-#%{_datadir}/locale/*/LC_MESSAGES/muine.mo
