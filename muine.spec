@@ -28,7 +28,7 @@ BuildRequires:	gstreamer-GConf-devel >= %{min_ver}
 BuildRequires:	gstreamer-plugins-devel >= %{min_ver}
 %endif
 BuildRequires:	gtk+2-devel >= 2.0.4
-BuildRequires:	gtk-sharp-devel >= 0.18
+BuildRequires:	dotnet-gtk-devel >= 0.91.1
 BuildRequires:	intltool >= 0.21
 BuildRequires:	libid3tag-devel >= 0.15
 BuildRequires:	libogg-devel
@@ -48,7 +48,7 @@ Requires:	gstreamer-gnomevfs >= %{min_ver}
 # videobalance plugin is required!
 Requires:	gstreamer-video-effects >= %{min_ver}
 %endif
-Requires:	gtk-sharp >= 0.18
+Requires:	dotnet-gtk >= 0.91.1
 Requires:	mono >= 0.91
 %{!?with_gstreamer:Requires:	xine-plugin-audio}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
