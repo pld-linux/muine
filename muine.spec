@@ -37,6 +37,7 @@ BuildRequires:	libvorbis-devel
 BuildRequires:	mono-csharp >= 0.96
 BuildRequires:	pkgconfig
 BuildRequires:	zlib-devel
+BuildRequires:	libgnome-devel
 %{!?with_gstreamer:BuildRequires:	xine-lib-devel >= 1.0.0}
 Requires(post):	GConf2 >= 2.3.0
 Requires(post):	scrollkeeper
