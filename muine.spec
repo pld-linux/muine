@@ -109,7 +109,7 @@ echo
 echo "Remember to install appropriate gstreamer plugins for files"
 echo "you want to play:"
 echo "- gstreamer-flac (for FLAC)"
-echo "- gstreamer-mad (for mp3s)"
+echo "- gstreamer-mad (for MP3s)"
 echo "- gstreamer-vorbis (for Ogg Vorbis)"
 echo
 %else
