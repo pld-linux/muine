@@ -5,8 +5,8 @@ diff -urN aa/muine-0.5.1/configure.in muine-0.5.1/configure.in
  AC_SUBST(MONO_FLAGS)
  
  dnl Intl
--ALL_LINGUAS="ca cs de es eu fr hr ko nl no pt pt_BR sr sr@Latn sv"
-+ALL_LINGUAS="ca cs de es eu fr hr ko nb nl pt pt_BR sr sr@Latn sv"
+-ALL_LINGUAS="ca cs de es eu fr hr hu ko nl no pt pt_BR sr sr@Latn sv"
++ALL_LINGUAS="ca cs de es eu fr hr hu ko nb nl pt pt_BR sr sr@Latn sv"
  GETTEXT_PACKAGE=muine
  AC_SUBST(GETTEXT_PACKAGE)
  AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
