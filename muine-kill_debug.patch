@@ -1,0 +1,25 @@
+diff -aurN muine-0.2.1-20040126.orig/configure.in muine-0.2.1-20040126/configure.in
+--- muine-0.2.1-20040126.orig/configure.in	2004-01-27 12:37:16.000000000 +0100
++++ muine-0.2.1-20040126/configure.in	2004-01-27 12:51:09.864327184 +0100
+@@ -13,8 +13,8 @@
+ AC_HEADER_STDC
+ AM_PROG_LIBTOOL
+ 
+-GNOME_DEBUG_CHECK
+-GNOME_COMPILE_WARNINGS(error)
++dnl GNOME_DEBUG_CHECK
++dnl GNOME_COMPILE_WARNINGS(error)
+ AM_PATH_GLIB_2_0
+ 
+ GSTREAMER_REQUIRED=0.6.0
+@@ -40,8 +40,8 @@
+ AM_GCONF_SOURCE_2
+ 
+ dnl Check for GDBM
+-AC_CHECK_HEADER(gdbm.h,,AC_MSG_ERROR(you need gdbm))
+-GDBM_LIBS="-lgdbm"
++dnl AC_CHECK_HEADER(gdbm.h,,AC_MSG_ERROR(you need gdbm))
++dnl GDBM_LIBS="-lgdbm"
+ AC_SUBST(GDBM_LIBS)
+ 
+ dnl Check for Ogg Vorbis
