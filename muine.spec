@@ -7,12 +7,12 @@
 Summary:	Music player for GNOME
 Summary(pl):	Odtwarzacz muzyczny dla GNOME
 Name:		muine
-Version:	0.5.2
+Version:	0.5.3
 Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://muine.gooeylinux.org/%{name}-%{version}.tar.gz
-# Source0-md5:	d00095ab30b52a9e399eab6e05896bcc
+# Source0-md5:	0981a72ff976a48d4eba7fedefa0e9db
 Patch0:		%{name}-locale-names.patch
 URL:		http://muine.gooeylinux.org/
 BuildRequires:	GConf2-devel
@@ -71,7 +71,7 @@ na wzorze iTunes jak Rhythmbox i Jamboree.
 mv po/{no,nb}.po
 
 %build
-cp %{_datadir}/automake/mkinstalldirs .
+cp /usr/share/automake/mkinstalldirs .
 glib-gettextize --copy --force
 intltoolize --copy --force
 %{__libtoolize}
