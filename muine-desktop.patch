@@ -1,26 +1,16 @@
-diff -aurN muine-0.5.1.orig/data/muine.desktop muine-0.5.1/data/muine.desktop
---- muine-0.5.1.orig/data/muine.desktop	2004-04-03 14:40:40.000000000 +0200
-+++ muine-0.5.1/data/muine.desktop	2004-04-03 22:37:57.829819784 +0200
-@@ -11,6 +11,7 @@
- Name[ko]=Muine 음악 연주기
- Name[nl]=Muine muziekspeler
- Name[no]=Muine musikkavspiller
+diff -aurN muine-0.5.1.orig/data/muine.desktop.in muine-0.5.1/data/muine.desktop.in
+--- muine-0.5.1.orig/data/muine.desktop.in	2004-01-17 16:30:56.000000000 +0100
++++ muine-0.5.1/data/muine.desktop.in	2004-04-03 22:55:23.356875512 +0200
+@@ -3,9 +3,11 @@
+ Encoding=UTF-8
+ _Name=Muine Music Player
+ _Comment=Listen to your music
 +Name[pl]=Odtwarzacz muzyczny Muine
- Name[pt]=Reprodutor de Música Muine
- Name[pt_BR]=Reprodutor de música Muine
- Name[sr]=Музички програм Мујна
-@@ -26,6 +27,7 @@
- Comment[ko]=음악을 듣습니다
- Comment[nl]=Naar uw muziek luisteren
- Comment[no]=Hør på din musikk
 +Comment[pl]=Słuchaj Twojej muzyki
- Comment[pt]=Escute a sua música
- Comment[pt_BR]=Escute a sua música
- Comment[sr]=Слушајте вашу музику 
-@@ -36,4 +38,5 @@
+ Exec=muine
+ Icon=muine.png
  StartupNotify=true
  Terminal=false
  Type=Application
 -Categories=GNOME;Application;AudioVideo;X-Ximian-Main;X-Red-Hat-Base;
 +Categories=AudioVideo;Player;
-+
