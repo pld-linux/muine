@@ -28,7 +28,7 @@ BuildRequires:	gstreamer-devel >= %{min_ver}
 BuildRequires:	gstreamer-GConf-devel >= %{min_ver}
 BuildRequires:	gstreamer-plugins-devel >= %{min_ver}
 %endif
-BuildRequires:	gtk+2-devel >= 2.0.4
+BuildRequires:	gtk+2-devel >= 1:2.0.4
 BuildRequires:	dotnet-gtk-sharp-devel >= 0.98
 BuildRequires:	intltool >= 0.21
 BuildRequires:	libid3tag-devel >= 0.15
