@@ -1,0 +1,9 @@
+diff -urN muine-0.6.3.oryg/data/muine.desktop.in muine-0.6.3/data/muine.desktop.in
+--- muine-0.6.3.oryg/data/muine.desktop.in	2004-09-22 21:09:33.901162176 +0200
++++ muine-0.6.3/data/muine.desktop.in	2004-09-22 21:10:03.500662368 +0200
+@@ -8,4 +8,4 @@
+ StartupNotify=true
+ Terminal=false
+ Type=Application
+-Categories=GNOME;Application;AudioVideo;X-Ximian-Main;X-Red-Hat-Base;
++Categories=GTK;GNOME;Audio;Player;
