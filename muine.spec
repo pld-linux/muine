@@ -54,7 +54,6 @@ Muine jest odtwarzaczem muzycznym u¿ywaj±cym nowego typu UI
 na wzorze iTunes jak Rhythmbox i Jamboree.
 
 %prep
-#%setup -qn %{name}-%{version}-%{_rel}
 %setup -q
 
 %build
