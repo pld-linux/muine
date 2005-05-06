@@ -1,18 +1,18 @@
 #
 # Conditional build
-%bcond_with	gstreamer	# build with gstreamer instead xine-lib
+%bcond_with	gstreamer	# build with gstreamer instead xine-lib 
 #
 %define		min_ver	0.8.0
 #
 Summary:	Music player for GNOME
 Summary(pl):	Odtwarzacz muzyczny dla GNOME
 Name:		muine
-Version:	0.7.1
-Release:	0.1
+Version:	0.8.3
+Release:	0.2
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://muine.gooeylinux.org/%{name}-%{version}.tar.gz
-# Source0-md5:	bf7387234629421d23a6983f6eec3ae9
+# Source0-md5:	4e21eeb8e809bebf1e13540e44a6259d
 Patch0:		%{name}-desktop.patch
 URL:		http://muine.gooeylinux.org/
 BuildRequires:	GConf2-devel
@@ -28,7 +28,7 @@ BuildRequires:	gstreamer-GConf-devel >= %{min_ver}
 BuildRequires:	gstreamer-plugins-devel >= %{min_ver}
 %endif
 BuildRequires:	gtk+2-devel >= 1:2.0.4
-BuildRequires:	dotnet-gtk-sharp-devel >= 0.98
+BuildRequires:	dotnet-gtk-sharp-devel >= 1.9.3
 BuildRequires:	intltool >= 0.21
 BuildRequires:	libid3tag-devel >= 0.15
 BuildRequires:	libogg-devel
@@ -49,8 +49,8 @@ Requires:	gstreamer-gnomevfs >= %{min_ver}
 # videobalance plugin is required!
 Requires:	gstreamer-video-effects >= %{min_ver}
 %endif
-Requires:	dotnet-gtk-sharp >= 0.98
-Requires:	mono >= 0.96
+Requires:	dotnet-gtk-sharp >= 1.9.3
+Requires:	mono >= 1.0
 %{!?with_gstreamer:Requires:	xine-plugin-audio}
 ExcludeArch:	alpha amd64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -70,8 +70,6 @@ na wzorze iTunes jak Rhythmbox i Jamboree.
 %setup -q
 %patch0 -p1
 
-mv po/{no,nb}.po
-
 %build
 cp /usr/share/automake/mkinstalldirs .
 glib-gettextize --copy --force
@@ -82,9 +80,11 @@ intltoolize --copy --force
 %{__automake}
 %{__autoconf}
 %configure \
-	%{?with_gstreamer:--enable-gstreamer=yes} \
+	%{!?with_gstreamer:--enable-xine=yes} \
 	--disable-static
 		
+%{__make}
+
 %install
 rm -rf $RPM_BUILD_ROOT
 
@@ -129,6 +129,8 @@ echo
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/muine
 %attr(755,root,root) %{_libdir}/muine/*
-%{_datadir}/application-registry/*
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
+/usr/lib/dbus-1.0/services/*
+/usr/lib/mono/gac/*
+%{_pkgconfigdir}/*.pc
