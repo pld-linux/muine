@@ -53,7 +53,8 @@ Requires:	gstreamer-video-effects >= %{min_ver}
 Requires:	dotnet-gtk-sharp >= 0.98
 Requires:	mono >= 0.96
 %{!?with_gstreamer:Requires:	xine-plugin-audio}
-ExcludeArch:	alpha amd64
+# TODO: recheck alpha
+ExcludeArch:	%{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
