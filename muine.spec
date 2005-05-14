@@ -50,7 +50,8 @@ Requires:	gstreamer-gnomevfs >= %{min_ver}
 Requires:	dotnet-gtk-sharp-gnome >= 1.9.3
 Requires:	mono >= 1.1
 %{!?with_gstreamer:Requires:	xine-plugin-audio}
-ExcludeArch:	alpha amd64
+# TODO: recheck alpha
+ExcludeArch:	%{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
