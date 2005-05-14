@@ -46,10 +46,8 @@ Requires:	gstreamer-audio-effects >= %{min_ver}
 Requires:	gstreamer-audio-formats >= %{min_ver}
 Requires:	gstreamer-audiosink
 Requires:	gstreamer-gnomevfs >= %{min_ver}
-# videobalance plugin is required!
-Requires:	gstreamer-video-effects >= %{min_ver}
 %endif
-Requires:	dotnet-gtk-sharp >= 1.9.3
+Requires:	dotnet-gtk-sharp-gnome >= 1.9.3
 Requires:	mono >= 1.1
 %{!?with_gstreamer:Requires:	xine-plugin-audio}
 ExcludeArch:	alpha amd64
