@@ -47,6 +47,7 @@ Requires:	gstreamer-audio-formats >= %{min_ver}
 Requires:	gstreamer-audiosink
 Requires:	gstreamer-gnomevfs >= %{min_ver}
 %endif
+Requires:	dotnet-dbus-sharp
 Requires:	dotnet-gtk-sharp-gnome >= 1.9.3
 Requires:	mono >= 1.1
 %{!?with_gstreamer:Requires:	xine-plugin-audio}
