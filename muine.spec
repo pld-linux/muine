@@ -1,3 +1,6 @@
+# TODO:
+# - plugins:  (install & subpckages)
+# - aac support (faad2)
 #
 # Conditional build
 %bcond_with	gstreamer	# build with gstreamer instead xine-lib 
@@ -34,7 +37,7 @@ BuildRequires:	libid3tag-devel >= 0.15
 BuildRequires:	libogg-devel
 BuildRequires:	libtool
 BuildRequires:	libvorbis-devel
-BuildRequires:	mono-csharp >= 0.96
+BuildRequires:	mono-csharp >= 1.1.6
 BuildRequires:	pkgconfig
 BuildRequires:	zlib-devel
 BuildRequires:	libgnome-devel
@@ -49,7 +52,7 @@ Requires:	gstreamer-gnomevfs >= %{min_ver}
 %endif
 Requires:	dotnet-dbus-sharp
 Requires:	dotnet-gtk-sharp-gnome >= 1.9.3
-Requires:	mono >= 1.1
+Requires:	mono >= 1.1.6
 %{!?with_gstreamer:Requires:	xine-plugin-audio}
 # TODO: recheck alpha
 ExcludeArch:	%{x8664}
