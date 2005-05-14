@@ -8,7 +8,7 @@ Summary:	Music player for GNOME
 Summary(pl):	Odtwarzacz muzyczny dla GNOME
 Name:		muine
 Version:	0.8.3
-Release:	0.2
+Release:	0.3
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://muine.gooeylinux.org/%{name}-%{version}.tar.gz
@@ -28,7 +28,7 @@ BuildRequires:	gstreamer-GConf-devel >= %{min_ver}
 BuildRequires:	gstreamer-plugins-devel >= %{min_ver}
 %endif
 BuildRequires:	gtk+2-devel >= 1:2.0.4
-BuildRequires:	dotnet-gtk-sharp-devel >= 1.9.3
+BuildRequires:	dotnet-gtk-sharp-gnome-devel >= 1.9.3
 BuildRequires:	intltool >= 0.21
 BuildRequires:	libid3tag-devel >= 0.15
 BuildRequires:	libogg-devel
@@ -39,8 +39,8 @@ BuildRequires:	pkgconfig
 BuildRequires:	zlib-devel
 BuildRequires:	libgnome-devel
 %{!?with_gstreamer:BuildRequires:	xine-lib-devel >= 1.0.0}
-Requires(post):	GConf2 >= 2.3.0
-Requires(post):	scrollkeeper
+Requires(post,preun):	GConf2 >= 2.3.0
+Requires(post,postun):	scrollkeeper
 %if %{with gstreamer}
 Requires:	gstreamer-audio-effects >= %{min_ver}
 Requires:	gstreamer-audio-formats >= %{min_ver}
@@ -50,7 +50,7 @@ Requires:	gstreamer-gnomevfs >= %{min_ver}
 Requires:	gstreamer-video-effects >= %{min_ver}
 %endif
 Requires:	dotnet-gtk-sharp >= 1.9.3
-Requires:	mono >= 1.0
+Requires:	mono >= 1.1
 %{!?with_gstreamer:Requires:	xine-plugin-audio}
 ExcludeArch:	alpha amd64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -71,9 +71,8 @@ na wzorze iTunes jak Rhythmbox i Jamboree.
 %patch0 -p1
 
 %build
-cp /usr/share/automake/mkinstalldirs .
-glib-gettextize --copy --force
-intltoolize --copy --force
+%{__glib_gettextize}
+%{__intltoolize}
 %{__libtoolize}
 %{__aclocal} -I m4
 %{__autoheader}
@@ -101,8 +100,8 @@ rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
 rm -rf $RPM_BUILD_ROOT
 
 %post
-%gconf_schema_install
-/usr/bin/scrollkeeper-update
+%gconf_schema_install muine.schemas
+%scrollkeeper_update_post
 %if %{with gstreamer}
 echo
 echo "Remember to install appropriate gstreamer plugins for files"
@@ -120,7 +119,11 @@ echo "- xine-decode-ogg (for Ogg Vorbis)"
 echo
 %endif
 
-%postun -p /usr/bin/scrollkeeper-update
+%preun
+%gconf_schema_uninstall muine.schemas
+
+%postun
+%scrollkeeper_update_postun
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
