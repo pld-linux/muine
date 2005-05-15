@@ -162,7 +162,7 @@ EOF
 %{_sysconfdir}/gconf/schemas/*
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/muine
-%attr(755,root,root) %{_libdir}/muine/libmuine.so.*.*.*
+%attr(755,root,root) %{_libdir}/muine/libmuine*
 %attr(755,root,root) %{_libdir}/muine/muine.*
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
