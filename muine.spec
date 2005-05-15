@@ -1,5 +1,4 @@
 # TODO:
-# - plugins:  (install & subpckages)
 # - aac support (faad2)
 #
 # Conditional build
@@ -69,6 +68,31 @@ Muine jest odtwarzaczem muzycznym u¿ywaj±cym nowego typu UI
 ³atwiejszym i bardziej komfortowym  w u¿yciu ni¿ programy oparte
 na wzorze iTunes jak Rhythmbox i Jamboree.
 
+%package plugin-dashboard
+Summary:        Dashboard plugin for Muine
+Summary(pl):    Wtyczka dashboard dla Muine
+Group:          X11/Applications
+Requires:       %{name} = %{version}-%{release}
+Requires:       dashboard
+
+%description plugin-dashboard
+Simple dashboard plugin for Muine.
+
+%description -l pl plugin-dashboard
+Prosta wtyczka dashboard dla Muine.
+
+%package plugin-trayicon
+Summary:        Trayicon plugin for Muine
+Summary(pl):    Wtyczka obszaru powiadamiania dla Muine
+Group:          X11/Applications
+Requires:       %{name} = %{version}-%{release}
+
+%description plugin-trayicon
+Trayicon plugin for Muine.
+
+%description -l pl plugin-trayicon
+Wtyczka obszaru powiadamiania dla Muine.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -89,10 +113,14 @@ na wzorze iTunes jak Rhythmbox i Jamboree.
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_libdir}/muine/plugins
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
+
+install plugins/*.{dll,png,xml} \
+	$RPM_BUILD_ROOT%{_libdir}/muine/plugins
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/muine/*.la
 
@@ -106,20 +134,20 @@ rm -rf $RPM_BUILD_ROOT
 %gconf_schema_install muine.schemas
 %scrollkeeper_update_post
 %if %{with gstreamer}
-echo
-echo "Remember to install appropriate gstreamer plugins for files"
-echo "you want to play:"
-echo "- gstreamer-flac (for FLAC)"
-echo "- gstreamer-mad (for MP3s)"
-echo "- gstreamer-vorbis (for Ogg Vorbis)"
-echo
+%banner %{name} -e << EOF
+Remember to install appropriate GStreamer plugins for files
+you want to play:
+- gstreamer-flac (for FLAC)
+- gstreamer-mad (for MP3s)
+- gstreamer-vorbis (for Ogg Vorbis)
+EOF
 %else
-echo
-echo "Remember to install appropriate xine-decode plugins for files"
-echo "you want to play:"
-echo "- xine-decode-flac (for FLAC)"
-echo "- xine-decode-ogg (for Ogg Vorbis)"
-echo
+%banner %{name} -e << EOF
+Remember to install appropriate xine-decode plugins for files
+you want to play:
+- xine-decode-flac (for FLAC)
+- xine-decode-ogg (for Ogg Vorbis)
+EOF
 %endif
 
 %preun
@@ -134,9 +162,20 @@ echo
 %{_sysconfdir}/gconf/schemas/*
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/muine
-%attr(755,root,root) %{_libdir}/muine/*
+%attr(755,root,root) %{_libdir}/muine/libmuine.so.*.*.*
+%attr(755,root,root) %{_libdir}/muine/muine.*
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
 /usr/lib/dbus-1.0/services/*
 /usr/lib/mono/gac/*
 %{_pkgconfigdir}/*.pc
+
+%files plugin-dashboard
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/muine/plugins/DashboardPlugin.dll
+
+%files plugin-trayicon
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/muine/plugins/TrayIcon.dll
+%{_libdir}/muine/plugins/TrayIcon.xml
+%{_libdir}/muine/plugins/muine-tray-*.png
