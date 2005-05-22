@@ -20,6 +20,8 @@ URL:		http://muine.gooeylinux.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	dotnet-dbus-sharp-devel >= 0.21
+BuildRequires:	dotnet-gtk-sharp-gnome-devel >= 1.9.3
 BuildRequires:	flac-devel
 BuildRequires:	gdbm-devel
 BuildRequires:	gnome-common >= 2.8.0
@@ -30,7 +32,6 @@ BuildRequires:	gstreamer-GConf-devel >= %{min_ver}
 BuildRequires:	gstreamer-plugins-devel >= %{min_ver}
 %endif
 BuildRequires:	gtk+2-devel >= 1:2.0.4
-BuildRequires:	dotnet-gtk-sharp-gnome-devel >= 1.9.3
 BuildRequires:	intltool >= 0.21
 BuildRequires:	libid3tag-devel >= 0.15
 BuildRequires:	libogg-devel
@@ -43,14 +44,14 @@ BuildRequires:	libgnome-devel
 %{!?with_gstreamer:BuildRequires:	xine-lib-devel >= 1.0.0}
 Requires(post,preun):	GConf2 >= 2.3.0
 Requires(post,postun):	scrollkeeper
+Requires:	dotnet-dbus-sharp
+Requires:	dotnet-gtk-sharp-gnome >= 1.9.3
 %if %{with gstreamer}
 Requires:	gstreamer-audio-effects >= %{min_ver}
 Requires:	gstreamer-audio-formats >= %{min_ver}
 Requires:	gstreamer-audiosink
 Requires:	gstreamer-gnomevfs >= %{min_ver}
 %endif
-Requires:	dotnet-dbus-sharp
-Requires:	dotnet-gtk-sharp-gnome >= 1.9.3
 Requires:	mono >= 1.1.6
 %{!?with_gstreamer:Requires:	xine-plugin-audio}
 # TODO: recheck alpha
@@ -108,7 +109,6 @@ Wtyczka obszaru powiadamiania dla Muine.
 %configure \
 	%{!?with_gstreamer:--enable-xine=yes} \
 	--disable-static
-		
 %{__make}
 
 %install
