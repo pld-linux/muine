@@ -1,9 +1,10 @@
-diff -urN muine-0.6.3.oryg/data/muine.desktop.in muine-0.6.3/data/muine.desktop.in
---- muine-0.6.3.oryg/data/muine.desktop.in	2004-09-22 21:09:33.901162176 +0200
-+++ muine-0.6.3/data/muine.desktop.in	2004-09-22 21:10:03.500662368 +0200
-@@ -8,4 +8,4 @@
+diff -ruN muine-0.8.3./data/muine.desktop.in muine-0.8.3/data/muine.desktop.in
+--- muine-0.8.3./data/muine.desktop.in	2004-07-20 16:25:36.000000000 +0200
++++ muine-0.8.3/data/muine.desktop.in	2005-08-14 15:47:14.216415792 +0200
+@@ -8,5 +8,5 @@
  StartupNotify=true
  Terminal=false
  Type=Application
 -Categories=GNOME;Application;AudioVideo;X-Ximian-Main;X-Red-Hat-Base;
 +Categories=GTK;GNOME;Audio;Player;
+ MimeType=audio/x-mpegurl;application/x-ogg;application/ogg;application/x-flac;audio/x-flac;audio/x-mp3;audio/x-mpeg;audio/mpeg;

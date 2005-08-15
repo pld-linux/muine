@@ -1,12 +1,12 @@
-diff -urN muine-0.6.3.orig/configure.in muine-0.6.3/configure.in
---- muine-0.6.3.orig/configure.in	2004-06-20 12:29:21.423160448 +0200
-+++ muine-0.6.3/configure.in	2004-06-20 12:30:14.023164032 +0200
-@@ -107,7 +107,7 @@
- AC_SUBST(MONO_FLAGS)
+diff -ruN muine-0.8.3./configure.in muine-0.8.3/configure.in
+--- muine-0.8.3./configure.in	2005-05-04 19:01:12.000000000 +0200
++++ muine-0.8.3/configure.in	2005-08-14 15:59:27.023012256 +0200
+@@ -157,7 +157,7 @@
+ AC_PATH_PROG(MONODOC, monodoc)
  
  dnl Intl
--ALL_LINGUAS="bg ca cs da de en_CA en_GB es eu fr hr hu is ja ko nl no pl pt pt_BR sr sr@Latn sv"
-+ALL_LINGUAS="bg ca cs da de en_CA en_GB es eu fr hr hu is ja ko nb nl pl pt pt_BR sr sr@Latn sv"
+-ALL_LINGUAS="az bg ca cs da de en_CA en_GB es et eu fi fr hr hu is ja ko lt ms nb nl no pl pt pt_BR ro ru rw sr sr@Latn sv zh_CN"
++ALL_LINGUAS="az bg ca cs da de en_CA en_GB es et eu fi fr hr hu is ja ko lt ms nb nb nl pl pt pt_BR ro ru rw sr sr@Latn sv zh_CN"
  GETTEXT_PACKAGE=muine
  AC_SUBST(GETTEXT_PACKAGE)
  AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
