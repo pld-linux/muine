@@ -21,18 +21,13 @@ URL:		http://muine.gooeylinux.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	dotnet-dbus-sharp-devel >= 0.21
+BuildRequires:	dotnet-gtk-sharp2-gnome-devel >= 1.9.3
+BuildRequires:	faad2-devel
 BuildRequires:	flac-devel
 BuildRequires:	gdbm-devel
 BuildRequires:	gnome-common >= 2.8.0
 BuildRequires:	gnome-vfs2-devel >= 2.4.0
-%if %{with gstreamer}
-BuildRequires:	gstreamer-devel >= %{min_ver}
-BuildRequires:	gstreamer-GConf-devel >= %{min_ver}
-BuildRequires:	gstreamer-plugins-devel >= %{min_ver}
-%endif
-BuildRequires:	dotnet-gtk-sharp-devel >= 0.98
-BuildRequires:	dotnet-dbus-sharp-devel >= 0.21
-BuildRequires:	faad2-devel
 BuildRequires:	gtk+2-devel >= 1:2.0.4
 BuildRequires:	intltool >= 0.21
 BuildRequires:	libgnome-devel
@@ -40,22 +35,27 @@ BuildRequires:	libid3tag-devel >= 0.15
 BuildRequires:	libogg-devel
 BuildRequires:	libtool
 BuildRequires:	libvorbis-devel
-BuildRequires:	mono-csharp >= 0.96
+BuildRequires:	mono-csharp >= 1.1.6
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(monoautodeps)
 BuildRequires:	zlib-devel
-%{!?with_gstreamer:BuildRequires:	xine-lib-devel >= 1.0.0}
-Requires(post):	GConf2 >= 2.3.0
-Requires(post):	scrollkeeper
+%if %{with gstreamer}
+BuildRequires:	gstreamer-devel >= %{min_ver}
+BuildRequires:	gstreamer-GConf-devel >= %{min_ver}
+BuildRequires:	gstreamer-plugins-devel >= %{min_ver}
+%else
+BuildRequires:	xine-lib-devel >= 1.0.0
+%endif
+Requires(post,preun):	GConf2 >= 2.3.0
+Requires(post,preun):	scrollkeeper
 %if %{with gstreamer}
 Requires:	gstreamer-audio-effects >= %{min_ver}
 Requires:	gstreamer-audio-formats >= %{min_ver}
 Requires:	gstreamer-audiosink
 Requires:	gstreamer-gnomevfs >= %{min_ver}
-# videobalance plugin is required!
-Requires:	gstreamer-video-effects >= %{min_ver}
+%else
+Requires:	xine-plugin-audio
 %endif
-%{!?with_gstreamer:Requires:	xine-plugin-audio}
 # TODO: recheck alpha
 ExcludeArch:	%{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -71,6 +71,31 @@ Muine jest odtwarzaczem muzycznym u¿ywaj±cym nowego typu UI
 ³atwiejszym i bardziej komfortowym  w u¿yciu ni¿ programy oparte
 na wzorze iTunes jak Rhythmbox i Jamboree.
 
+%package plugin-dashboard
+Summary:	Dashboard plugin for Muine
+Summary(pl):	Wtyczka dashboard dla Muine
+Group:		X11/Applications
+Requires:	%{name} = %{version}-%{release}
+Requires:	dashboard
+
+%description plugin-dashboard
+Simple dashboard plugin for Muine.
+
+%description -l pl plugin-dashboard
+Prosta wtyczka dashboard dla Muine.
+
+%package plugin-trayicon
+Summary:	Trayicon plugin for Muine
+Summary(pl):	Wtyczka obszaru powiadamiania dla Muine
+Group:		X11/Applications
+Requires:	%{name} = %{version}-%{release}
+
+%description plugin-trayicon
+Trayicon plugin for Muine.
+
+%description -l pl plugin-trayicon
+Wtyczka obszaru powiadamiania dla Muine.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -80,9 +105,8 @@ na wzorze iTunes jak Rhythmbox i Jamboree.
 mv po/{no,nb}.po
 
 %build
-cp /usr/share/automake/mkinstalldirs .
-glib-gettextize --copy --force
-intltoolize --copy --force
+%{__glib_gettextize}
+%{__intltoolize}
 %{__libtoolize}
 %{__aclocal} -I m4
 %{__autoheader}
@@ -96,39 +120,47 @@ intltoolize --copy --force
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_libdir}/muine/plugins
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 
-%find_lang %{name} --with-gnome --all-name
+install plugins/*.{dll,png,xml} \
+	$RPM_BUILD_ROOT%{_libdir}/muine/plugins
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/muine/*.la
+
+%find_lang %{name} --with-gnome --all-name
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-%gconf_schema_install
-/usr/bin/scrollkeeper-update
+%gconf_schema_install muine.schemas
+%scrollkeeper_update_post
 %if %{with gstreamer}
-echo
-echo "Remember to install appropriate gstreamer plugins for files"
-echo "you want to play:"
-echo "- gstreamer-flac (for FLAC)"
-echo "- gstreamer-mad (for MP3s)"
-echo "- gstreamer-vorbis (for Ogg Vorbis)"
-echo
+%banner %{name} -e << EOF
+Remember to install appropriate GStreamer plugins for files
+you want to play:
+- gstreamer-flac (for FLAC)
+- gstreamer-mad (for MP3s)
+- gstreamer-vorbis (for Ogg Vorbis)
+EOF
 %else
-echo
-echo "Remember to install appropriate xine-decode plugins for files"
-echo "you want to play:"
-echo "- xine-decode-flac (for FLAC)"
-echo "- xine-decode-ogg (for Ogg Vorbis)"
-echo
+%banner %{name} -e << EOF
+Remember to install appropriate xine-decode plugins for files
+you want to play:
+- xine-decode-flac (for FLAC)
+- xine-decode-ogg (for Ogg Vorbis)
+EOF
 %endif
 
-%postun -p /usr/bin/scrollkeeper-update
+%preun
+%gconf_schema_uninstall muine.schemas
+
+%postun
+%scrollkeeper_update_postun
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
@@ -136,7 +168,9 @@ echo
 %{_sysconfdir}/gconf/schemas/*
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/muine
-%attr(755,root,root) %{_libdir}/muine/*
+%dir %{_libdir}/muine/plugins
+%attr(755,root,root) %{_libdir}/muine/libmuine.*
+%attr(755,root,root) %{_libdir}/muine/muine.*
 %{_libdir}/dbus-1.0/services/*
 %{_libdir}/mono/gac/*
 %{_libdir}/mono/muine
@@ -144,3 +178,13 @@ echo
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
 %{_pkgconfigdir}/*
+
+%files plugin-dashboard
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/muine/plugins/DashboardPlugin.dll
+
+%files plugin-trayicon
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/muine/plugins/TrayIcon.dll
+%{_libdir}/muine/plugins/TrayIcon.xml
+%{_libdir}/muine/plugins/muine-tray-*.png
