@@ -1,20 +1,22 @@
 #
 # Conditional build
-%bcond_with	gstreamer	# build with gstreamer instead xine-lib
+%bcond_without	gstreamer	# build with xine-lib instead of gstreamer
 #
 %define		min_ver	0.8.0
 #
+%include	/usr/lib/rpm/macros.mono
 Summary:	Music player for GNOME
 Summary(pl):	Odtwarzacz muzyczny dla GNOME
 Name:		muine
-Version:	0.6.3
-Release:	4
+Version:	0.8.3
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://muine.gooeylinux.org/%{name}-%{version}.tar.gz
-# Source0-md5:	dc7923e1e0ba87f0303bc30f14f604e3
+# Source0-md5:	4e21eeb8e809bebf1e13540e44a6259d
 Patch0:		%{name}-locale-names.patch
 Patch1:		%{name}-desktop.patch
+Patch2:		%{name}-cs0104.patch
 URL:		http://muine.gooeylinux.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf
@@ -28,17 +30,20 @@ BuildRequires:	gstreamer-devel >= %{min_ver}
 BuildRequires:	gstreamer-GConf-devel >= %{min_ver}
 BuildRequires:	gstreamer-plugins-devel >= %{min_ver}
 %endif
-BuildRequires:	gtk+2-devel >= 1:2.0.4
 BuildRequires:	dotnet-gtk-sharp-devel >= 0.98
+BuildRequires:	dotnet-dbus-sharp-devel >= 0.21
+BuildRequires:	faad2-devel
+BuildRequires:	gtk+2-devel >= 1:2.0.4
 BuildRequires:	intltool >= 0.21
+BuildRequires:	libgnome-devel
 BuildRequires:	libid3tag-devel >= 0.15
 BuildRequires:	libogg-devel
 BuildRequires:	libtool
 BuildRequires:	libvorbis-devel
 BuildRequires:	mono-csharp >= 0.96
 BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(monoautodeps)
 BuildRequires:	zlib-devel
-BuildRequires:	libgnome-devel
 %{!?with_gstreamer:BuildRequires:	xine-lib-devel >= 1.0.0}
 Requires(post):	GConf2 >= 2.3.0
 Requires(post):	scrollkeeper
@@ -50,8 +55,6 @@ Requires:	gstreamer-gnomevfs >= %{min_ver}
 # videobalance plugin is required!
 Requires:	gstreamer-video-effects >= %{min_ver}
 %endif
-Requires:	dotnet-gtk-sharp >= 0.98
-Requires:	mono >= 0.96
 %{!?with_gstreamer:Requires:	xine-plugin-audio}
 # TODO: recheck alpha
 ExcludeArch:	%{x8664}
@@ -72,6 +75,7 @@ na wzorze iTunes jak Rhythmbox i Jamboree.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 mv po/{no,nb}.po
 
@@ -85,9 +89,11 @@ intltoolize --copy --force
 %{__automake}
 %{__autoconf}
 %configure \
-	%{?with_gstreamer:--enable-gstreamer=yes} \
+	%{!?with_gstreamer:--enable-xine=yes} \
 	--disable-static
-		
+
+%{__make}
+
 %install
 rm -rf $RPM_BUILD_ROOT
 
@@ -126,11 +132,15 @@ echo
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog README TODO
+%doc AUTHORS ChangeLog MAINTAINERS NEWS PLUGINS README TODO
 %{_sysconfdir}/gconf/schemas/*
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/muine
 %attr(755,root,root) %{_libdir}/muine/*
-%{_datadir}/application-registry/*
+%{_libdir}/dbus-1.0/services/*
+%{_libdir}/mono/gac/*
+%{_libdir}/mono/muine
+%{_libdir}/monodoc/sources/*
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
+%{_pkgconfigdir}/*
