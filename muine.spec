@@ -57,7 +57,7 @@ Requires:	gstreamer-gnomevfs >= %{min_ver}
 Requires:	xine-plugin-audio
 %endif
 # TODO: recheck alpha
-ExcludeArch:	%{x8664}
+#ExcludeArch:	%{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
