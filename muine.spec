@@ -9,7 +9,7 @@ Summary:	Music player for GNOME
 Summary(pl):	Odtwarzacz muzyczny dla GNOME
 Name:		muine
 Version:	0.8.3
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://muine.gooeylinux.org/%{name}-%{version}.tar.gz
@@ -56,8 +56,6 @@ Requires:	gstreamer-gnomevfs >= %{min_ver}
 %else
 Requires:	xine-plugin-audio
 %endif
-# TODO: recheck alpha
-#ExcludeArch:	%{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -165,7 +163,6 @@ EOF
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog MAINTAINERS NEWS PLUGINS README TODO
-%{_sysconfdir}/gconf/schemas/*
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/muine
 %dir %{_libdir}/muine/plugins
@@ -178,6 +175,7 @@ EOF
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
 %{_pkgconfigdir}/*
+%{_sysconfdir}/gconf/schemas/muine.schemas
 
 %files plugin-dashboard
 %defattr(644,root,root,755)
