@@ -80,7 +80,7 @@ Requires:	dashboard
 %description plugin-dashboard
 Simple dashboard plugin for Muine.
 
-%description -l pl plugin-dashboard
+%description plugin-dashboard -l pl
 Prosta wtyczka dashboard dla Muine.
 
 %package plugin-trayicon
@@ -92,7 +92,7 @@ Requires:	%{name} = %{version}-%{release}
 %description plugin-trayicon
 Trayicon plugin for Muine.
 
-%description -l pl plugin-trayicon
+%description plugin-trayicon -l pl
 Wtyczka obszaru powiadamiania dla Muine.
 
 %prep
