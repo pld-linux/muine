@@ -2,21 +2,19 @@
 # Conditional build
 %bcond_without	gstreamer	# build with xine-lib instead of gstreamer
 #
-%define		min_ver	0.8.0
+%define		min_ver	0.10
 #
 %include	/usr/lib/rpm/macros.mono
 Summary:	Music player for GNOME
 Summary(pl):	Odtwarzacz muzyczny dla GNOME
 Name:		muine
-Version:	0.8.3
-Release:	3
+Version:	0.8.5
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://muine.gooeylinux.org/%{name}-%{version}.tar.gz
-# Source0-md5:	4e21eeb8e809bebf1e13540e44a6259d
-Patch0:		%{name}-locale-names.patch
-Patch1:		%{name}-desktop.patch
-Patch2:		%{name}-cs0104.patch
+Source0:	http://muine-player.org/releases/%{name}-%{version}.tar.gz
+# Source0-md5:	6960b21da5fd5cbc7a2e5a93a7bcd2a2
+Patch0:		%{name}-desktop.patch
 URL:		http://muine.gooeylinux.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf
@@ -41,8 +39,6 @@ BuildRequires:	rpmbuild(monoautodeps)
 BuildRequires:	zlib-devel
 %if %{with gstreamer}
 BuildRequires:	gstreamer-devel >= %{min_ver}
-BuildRequires:	gstreamer-GConf-devel >= %{min_ver}
-BuildRequires:	gstreamer-plugins-devel >= %{min_ver}
 %else
 BuildRequires:	xine-lib-devel >= 1.0.0
 %endif
@@ -56,7 +52,8 @@ Requires:	gstreamer-gnomevfs >= %{min_ver}
 %else
 Requires:	xine-plugin-audio
 %endif
-ExcludeArch:	alpha i386 sparc sparc64
+ExclusiveArch:	%{ix86} %{x8664} arm hppa ia64 ppc s390 s390x
+ExcludeArch:	i386
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -83,6 +80,18 @@ Simple dashboard plugin for Muine.
 %description plugin-dashboard -l pl
 Prosta wtyczka dashboard dla Muine.
 
+%package plugin-inotify
+Summary:	Inotify plugin for Muine
+Summary(pl):	Wtyczka Inotify dla Muine
+Group:		X11/Applications
+Requires:	%{name} = %{version}-%{release}
+
+%description plugin-inotify
+Inotify plugin for Muine.
+
+%description plugin-inotify -l pl
+Wtyczka Inotify dla Muine.
+
 %package plugin-trayicon
 Summary:	Trayicon plugin for Muine
 Summary(pl):	Wtyczka obszaru powiadamiania dla Muine
@@ -98,10 +107,6 @@ Wtyczka obszaru powiadamiania dla Muine.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
-
-mv po/{no,nb}.po
 
 %build
 %{__glib_gettextize}
@@ -138,6 +143,7 @@ rm -rf $RPM_BUILD_ROOT
 %post
 %gconf_schema_install muine.schemas
 %scrollkeeper_update_post
+%update_desktop_database_post
 %if %{with gstreamer}
 %banner %{name} -e << EOF
 Remember to install appropriate GStreamer plugins for files
@@ -160,6 +166,7 @@ EOF
 
 %postun
 %scrollkeeper_update_postun
+%update_desktop_database_postun
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
@@ -169,7 +176,7 @@ EOF
 %dir %{_libdir}/muine/plugins
 %attr(755,root,root) %{_libdir}/muine/libmuine.*
 %attr(755,root,root) %{_libdir}/muine/muine.*
-%{_libdir}/dbus-1.0/services/*
+%{_datadir}/dbus-1/services/*
 %{_libdir}/mono/gac/*
 %{_libdir}/mono/muine
 %{_libdir}/monodoc/sources/*
@@ -181,6 +188,12 @@ EOF
 %files plugin-dashboard
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/muine/plugins/DashboardPlugin.dll
+
+%files plugin-inotify
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/muine/libinotifyglue.*
+%attr(755,root,root) %{_libdir}/muine/plugins/InotifyPlugin.dll
+%{_libdir}/muine/plugins/InotifyPlugin.dll.config
 
 %files plugin-trayicon
 %defattr(644,root,root,755)
