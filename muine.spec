@@ -9,7 +9,7 @@ Summary:	Music player for GNOME
 Summary(pl):	Odtwarzacz muzyczny dla GNOME
 Name:		muine
 Version:	0.8.5
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://muine-player.org/releases/%{name}-%{version}.tar.gz
@@ -19,24 +19,24 @@ URL:		http://muine.gooeylinux.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	dotnet-dbus-sharp-devel >= 0.21
-BuildRequires:	dotnet-gtk-sharp2-gnome-devel >= 1.9.3
+BuildRequires:	dotnet-dbus-sharp-devel >= 0.63
+BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
+BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
 BuildRequires:	faad2-devel
 BuildRequires:	flac-devel
 BuildRequires:	gdbm-devel
 BuildRequires:	gnome-common >= 2.8.0
-BuildRequires:	gnome-vfs2-devel >= 2.4.0
-BuildRequires:	gtk+2-devel >= 1:2.0.4
-BuildRequires:	intltool >= 0.21
-BuildRequires:	libgnome-devel
+BuildRequires:	gnome-vfs2-devel >= 2.16.0
+BuildRequires:	gtk+2-devel >= 2:2.10.3
+BuildRequires:	intltool >= 0.35
 BuildRequires:	libid3tag-devel >= 0.15
 BuildRequires:	libogg-devel
 BuildRequires:	libtool
 BuildRequires:	libvorbis-devel
 BuildRequires:	mono-csharp >= 1.1.6
+BuildRequires:	monodoc >= 1.1.9
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(monoautodeps)
-BuildRequires:	zlib-devel
 %if %{with gstreamer}
 BuildRequires:	gstreamer-devel >= %{min_ver}
 %else
@@ -45,7 +45,7 @@ BuildRequires:	xine-lib-devel >= 1.0.0
 Requires(post,preun):	GConf2 >= 2.3.0
 Requires(post,preun):	scrollkeeper
 %if %{with gstreamer}
-Requires:	gstreamer-audio-effects >= %{min_ver}
+Requires:	gstreamer-audio-effects-base >= %{min_ver}
 Requires:	gstreamer-audio-formats >= %{min_ver}
 Requires:	gstreamer-audiosink
 Requires:	gstreamer-gnomevfs >= %{min_ver}
@@ -124,7 +124,7 @@ Wtyczka obszaru powiadamiania dla Muine.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_libdir}/muine/plugins
+install -d $RPM_BUILD_ROOT%{_libdir}/{muine/plugins,monodoc/sources}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -132,6 +132,8 @@ install -d $RPM_BUILD_ROOT%{_libdir}/muine/plugins
 
 install plugins/*.{dll,png,xml} \
 	$RPM_BUILD_ROOT%{_libdir}/muine/plugins
+
+mv $RPM_BUILD_ROOT%{_docdir}/%{name}/* $RPM_BUILD_ROOT%{_libdir}/monodoc/sources
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/muine/*.la
 
