@@ -12,16 +12,16 @@ Version:	0.8.5
 Release:	2
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://muine-player.org/releases/%{name}-%{version}.tar.gz
+Source0:	http://www.muine-player.org/releases/%{name}-%{version}.tar.gz
 # Source0-md5:	6960b21da5fd5cbc7a2e5a93a7bcd2a2
 Patch0:		%{name}-desktop.patch
-URL:		http://muine.gooeylinux.org/
+URL:		http://www.muine-player.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	dotnet-dbus-sharp-devel >= 0.63
-BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
+BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
 BuildRequires:	faad2-devel
 BuildRequires:	flac-devel
 BuildRequires:	gdbm-devel
@@ -64,8 +64,8 @@ which is used by both Rhythmbox and Jamboree.
 %description -l pl
 Muine jest odtwarzaczem muzycznym u¿ywaj±cym nowego typu UI
 (interfejsu u¿ytkownika). Za³o¿eniem programu jest bycie o wiele
-³atwiejszym i bardziej komfortowym  w u¿yciu ni¿ programy oparte
-na wzorze iTunes jak Rhythmbox i Jamboree.
+³atwiejszym i bardziej komfortowym w u¿yciu ni¿ programy oparte na
+wzorze iTunes jak Rhythmbox i Jamboree.
 
 %package plugin-dashboard
 Summary:	Dashboard plugin for Muine
