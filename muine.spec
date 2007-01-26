@@ -1,3 +1,5 @@
+# TODO
+# - 0.8.7 tarball available
 #
 # Conditional build
 %bcond_without	gstreamer	# build with xine-lib instead of gstreamer
