@@ -7,7 +7,7 @@
 %define		min_ver	0.8.0
 #
 Summary:	Music player for GNOME
-Summary(pl):	Odtwarzacz muzyczny dla GNOME
+Summary(pl.UTF-8):   Odtwarzacz muzyczny dla GNOME
 Name:		muine
 Version:	0.8.3
 Release:	1
@@ -63,15 +63,15 @@ Muine is a music player using some new UI ideas. The idea is that it
 will be much easier and comfortable to use than the iTunes model,
 which is used by both Rhythmbox and Jamboree.
 
-%description -l pl
-Muine jest odtwarzaczem muzycznym uøywaj±cym nowego typu UI
-(interfejsu uøytkownika). Za≥oøeniem programu jest bycie o wiele
-≥atwiejszym i bardziej komfortowym  w uøyciu niø programy oparte
+%description -l pl.UTF-8
+Muine jest odtwarzaczem muzycznym u≈ºywajƒÖcym nowego typu UI
+(interfejsu u≈ºytkownika). Za≈Ço≈ºeniem programu jest bycie o wiele
+≈Çatwiejszym i bardziej komfortowym  w u≈ºyciu ni≈º programy oparte
 na wzorze iTunes jak Rhythmbox i Jamboree.
 
 %package plugin-dashboard
 Summary:        Dashboard plugin for Muine
-Summary(pl):    Wtyczka dashboard dla Muine
+Summary(pl.UTF-8):   Wtyczka dashboard dla Muine
 Group:          X11/Applications
 Requires:       %{name} = %{version}-%{release}
 Requires:       dashboard
@@ -79,19 +79,19 @@ Requires:       dashboard
 %description plugin-dashboard
 Simple dashboard plugin for Muine.
 
-%description -l pl plugin-dashboard
+%description -l pl.UTF-8 plugin-dashboard
 Prosta wtyczka dashboard dla Muine.
 
 %package plugin-trayicon
 Summary:        Trayicon plugin for Muine
-Summary(pl):    Wtyczka obszaru powiadamiania dla Muine
+Summary(pl.UTF-8):   Wtyczka obszaru powiadamiania dla Muine
 Group:          X11/Applications
 Requires:       %{name} = %{version}-%{release}
 
 %description plugin-trayicon
 Trayicon plugin for Muine.
 
-%description -l pl plugin-trayicon
+%description -l pl.UTF-8 plugin-trayicon
 Wtyczka obszaru powiadamiania dla Muine.
 
 %prep
