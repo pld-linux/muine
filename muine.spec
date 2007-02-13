@@ -8,7 +8,7 @@
 #
 %include	/usr/lib/rpm/macros.mono
 Summary:	Music player for GNOME
-Summary(pl.UTF-8):   Odtwarzacz muzyczny dla GNOME
+Summary(pl.UTF-8):	Odtwarzacz muzyczny dla GNOME
 Name:		muine
 Version:	0.8.5
 Release:	2
@@ -71,7 +71,7 @@ wzorze iTunes jak Rhythmbox i Jamboree.
 
 %package plugin-dashboard
 Summary:	Dashboard plugin for Muine
-Summary(pl.UTF-8):   Wtyczka dashboard dla Muine
+Summary(pl.UTF-8):	Wtyczka dashboard dla Muine
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 Requires:	dashboard
@@ -84,7 +84,7 @@ Prosta wtyczka dashboard dla Muine.
 
 %package plugin-inotify
 Summary:	Inotify plugin for Muine
-Summary(pl.UTF-8):   Wtyczka Inotify dla Muine
+Summary(pl.UTF-8):	Wtyczka Inotify dla Muine
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 
@@ -96,7 +96,7 @@ Wtyczka Inotify dla Muine.
 
 %package plugin-trayicon
 Summary:	Trayicon plugin for Muine
-Summary(pl.UTF-8):   Wtyczka obszaru powiadamiania dla Muine
+Summary(pl.UTF-8):	Wtyczka obszaru powiadamiania dla Muine
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 
