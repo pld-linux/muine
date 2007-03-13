@@ -17,20 +17,21 @@ Group:		X11/Applications/Multimedia
 Source0:	http://www.muine-player.org/releases/%{name}-%{version}.tar.gz
 # Source0-md5:	6960b21da5fd5cbc7a2e5a93a7bcd2a2
 Patch0:		%{name}-desktop.patch
+Patch1:		%{name}-flac.patch
 URL:		http://www.muine-player.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	dotnet-dbus-sharp-devel >= 0.63
-BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
-BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
+BuildRequires:	dotnet-dbus-sharp-devel >= 0.21
+BuildRequires:	dotnet-gtk-sharp2-gnome-devel >= 1.9.3
 BuildRequires:	faad2-devel
 BuildRequires:	flac-devel
 BuildRequires:	gdbm-devel
 BuildRequires:	gnome-common >= 2.8.0
-BuildRequires:	gnome-vfs2-devel >= 2.16.0
-BuildRequires:	gtk+2-devel >= 2:2.10.3
-BuildRequires:	intltool >= 0.35
+BuildRequires:	gnome-vfs2-devel >= 2.4.0
+BuildRequires:	gtk+2-devel >= 1:2.0.4
+BuildRequires:	intltool >= 0.21
+BuildRequires:	libgnome-devel
 BuildRequires:	libid3tag-devel >= 0.15
 BuildRequires:	libogg-devel
 BuildRequires:	libtool
@@ -109,6 +110,7 @@ Wtyczka obszaru powiadamiania dla Muine.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__glib_gettextize}
