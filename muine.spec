@@ -53,7 +53,7 @@ Requires:	gstreamer-gnomevfs >= %{min_ver}
 %else
 Requires:	xine-plugin-audio
 %endif
-ExclusiveArch:	%{ix86} %{x8664} arm hppa ia64 ppc s390 s390x
+Obsoletes:	muine-plugin-dashboard
 ExcludeArch:	i386
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
