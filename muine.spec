@@ -9,7 +9,7 @@ Summary:	Music player for GNOME
 Summary(pl.UTF-8):	Odtwarzacz muzyczny dla GNOME
 Name:		muine
 Version:	0.8.7
-Release:	0.1
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://www.muine-player.org/releases/%{name}-%{version}.tar.gz
