@@ -177,14 +177,13 @@ EOF
 %{_libdir}/muine/muine-plugin.dll
 %{_libdir}/monodoc/sources/*
 %{_desktopdir}/*.desktop
-#%%{_pixmapsdir}/*.png
-%{_pkgconfigdir}/*
-%{_sysconfdir}/gconf/schemas/muine.schemas
 %{_iconsdir}/hicolor/16x16/apps/muine.png
 %{_iconsdir}/hicolor/22x22/apps/muine.png
 %{_iconsdir}/hicolor/24x24/apps/muine.png
 %{_iconsdir}/hicolor/32x32/apps/muine.png
 %{_iconsdir}/hicolor/scalable/apps/muine.svg
+%{_pkgconfigdir}/*
+%{_sysconfdir}/gconf/schemas/muine.schemas
 
 %files plugin-inotify
 %defattr(644,root,root,755)
