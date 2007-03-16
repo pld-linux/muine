@@ -68,19 +68,6 @@ Muine jest odtwarzaczem muzycznym używającym nowego typu UI
 łatwiejszym i bardziej komfortowym w użyciu niż programy oparte na
 wzorze iTunes jak Rhythmbox i Jamboree.
 
-%package plugin-dashboard
-Summary:	Dashboard plugin for Muine
-Summary(pl.UTF-8):	Wtyczka dashboard dla Muine
-Group:		X11/Applications
-Requires:	%{name} = %{version}-%{release}
-Requires:	dashboard
-
-%description plugin-dashboard
-Simple dashboard plugin for Muine.
-
-%description plugin-dashboard -l pl.UTF-8
-Prosta wtyczka dashboard dla Muine.
-
 %package plugin-inotify
 Summary:	Inotify plugin for Muine
 Summary(pl.UTF-8):	Wtyczka Inotify dla Muine
@@ -181,17 +168,23 @@ EOF
 %attr(755,root,root) %{_libdir}/muine/libmuine.*
 %attr(755,root,root) %{_libdir}/muine/muine.*
 %{_datadir}/dbus-1/services/*
-%{_libdir}/mono/gac/*
-%{_libdir}/mono/muine
+#{_libdir}/mono/gac/*
+#{_libdir}/mono/muine
+%{_libdir}/muine/NDesk.DBus.GLib.dll
+%{_libdir}/muine/NDesk.DBus.GLib.dll.config
+%{_libdir}/muine/NDesk.DBus.dll
+%{_libdir}/muine/muine-dbus.dll
+%{_libdir}/muine/muine-plugin.dll
 %{_libdir}/monodoc/sources/*
 %{_desktopdir}/*.desktop
-%{_pixmapsdir}/*.png
+#%%{_pixmapsdir}/*.png
 %{_pkgconfigdir}/*
 %{_sysconfdir}/gconf/schemas/muine.schemas
-
-%files plugin-dashboard
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/muine/plugins/DashboardPlugin.dll
+%{_iconsdir}/hicolor/16x16/apps/muine.png
+%{_iconsdir}/hicolor/22x22/apps/muine.png
+%{_iconsdir}/hicolor/24x24/apps/muine.png
+%{_iconsdir}/hicolor/32x32/apps/muine.png
+%{_iconsdir}/hicolor/scalable/apps/muine.svg
 
 %files plugin-inotify
 %defattr(644,root,root,755)
