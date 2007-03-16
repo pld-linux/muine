@@ -1,5 +1,3 @@
-# TODO
-# - 0.8.7 tarball available
 #
 # Conditional build
 %bcond_without	gstreamer	# build with xine-lib instead of gstreamer
@@ -10,12 +8,12 @@
 Summary:	Music player for GNOME
 Summary(pl.UTF-8):	Odtwarzacz muzyczny dla GNOME
 Name:		muine
-Version:	0.8.5
-Release:	2
+Version:	0.8.7
+Release:	0.1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://www.muine-player.org/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	6960b21da5fd5cbc7a2e5a93a7bcd2a2
+# Source0-md5:	19f5aa148a7bd3c18cf1c3244813aa88
 Patch0:		%{name}-desktop.patch
 URL:		http://www.muine-player.org/
 BuildRequires:	GConf2-devel
