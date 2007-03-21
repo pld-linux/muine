@@ -1,5 +1,3 @@
-# TODO
-# - 0.8.7 tarball available
 #
 # Conditional build
 %bcond_without	gstreamer	# build with xine-lib instead of gstreamer
@@ -10,12 +8,12 @@
 Summary:	Music player for GNOME
 Summary(pl):	Odtwarzacz muzyczny dla GNOME
 Name:		muine
-Version:	0.8.5
-Release:	2
+Version:	0.8.7
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://www.muine-player.org/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	6960b21da5fd5cbc7a2e5a93a7bcd2a2
+# Source0-md5:	19f5aa148a7bd3c18cf1c3244813aa88
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-flac.patch
 URL:		http://www.muine-player.org/
@@ -55,7 +53,7 @@ Requires:	gstreamer-gnomevfs >= %{min_ver}
 %else
 Requires:	xine-plugin-audio
 %endif
-ExclusiveArch:	%{ix86} %{x8664} arm hppa ia64 ppc s390 s390x
+Obsoletes:	muine-plugin-dashboard
 ExcludeArch:	i386
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -69,19 +67,6 @@ Muine jest odtwarzaczem muzycznym u¿ywaj±cym nowego typu UI
 (interfejsu u¿ytkownika). Za³o¿eniem programu jest bycie o wiele
 ³atwiejszym i bardziej komfortowym w u¿yciu ni¿ programy oparte na
 wzorze iTunes jak Rhythmbox i Jamboree.
-
-%package plugin-dashboard
-Summary:	Dashboard plugin for Muine
-Summary(pl):	Wtyczka dashboard dla Muine
-Group:		X11/Applications
-Requires:	%{name} = %{version}-%{release}
-Requires:	dashboard
-
-%description plugin-dashboard
-Simple dashboard plugin for Muine.
-
-%description plugin-dashboard -l pl
-Prosta wtyczka dashboard dla Muine.
 
 %package plugin-inotify
 Summary:	Inotify plugin for Muine
@@ -183,17 +168,22 @@ EOF
 %attr(755,root,root) %{_libdir}/muine/libmuine.*
 %attr(755,root,root) %{_libdir}/muine/muine.*
 %{_datadir}/dbus-1/services/*
-%{_libdir}/mono/gac/*
-%{_libdir}/mono/muine
+#{_libdir}/mono/gac/*
+#{_libdir}/mono/muine
+%{_libdir}/muine/NDesk.DBus.GLib.dll
+%{_libdir}/muine/NDesk.DBus.GLib.dll.config
+%{_libdir}/muine/NDesk.DBus.dll
+%{_libdir}/muine/muine-dbus.dll
+%{_libdir}/muine/muine-plugin.dll
 %{_libdir}/monodoc/sources/*
 %{_desktopdir}/*.desktop
-%{_pixmapsdir}/*.png
+%{_iconsdir}/hicolor/16x16/apps/muine.png
+%{_iconsdir}/hicolor/22x22/apps/muine.png
+%{_iconsdir}/hicolor/24x24/apps/muine.png
+%{_iconsdir}/hicolor/32x32/apps/muine.png
+%{_iconsdir}/hicolor/scalable/apps/muine.svg
 %{_pkgconfigdir}/*
 %{_sysconfdir}/gconf/schemas/muine.schemas
-
-%files plugin-dashboard
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/muine/plugins/DashboardPlugin.dll
 
 %files plugin-inotify
 %defattr(644,root,root,755)
