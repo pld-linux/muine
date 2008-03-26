@@ -21,6 +21,7 @@ BuildRequires:	automake
 BuildRequires:	dotnet-dbus-sharp-devel >= 0.63
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
 BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
+BuildRequires:	dotnet-ndesk-dbus-glib-sharp-devel
 BuildRequires:	faad2-devel
 BuildRequires:	flac-devel
 BuildRequires:	gdbm-devel
@@ -166,9 +167,6 @@ EOF
 %{_datadir}/dbus-1/services/*
 #{_libdir}/mono/gac/*
 #{_libdir}/mono/muine
-%{_libdir}/muine/NDesk.DBus.GLib.dll
-%{_libdir}/muine/NDesk.DBus.GLib.dll.config
-%{_libdir}/muine/NDesk.DBus.dll
 %{_libdir}/muine/muine-dbus.dll
 %{_libdir}/muine/muine-plugin.dll
 %{_libdir}/monodoc/sources/*
