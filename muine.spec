@@ -4,7 +4,6 @@
 #
 %define		min_ver	0.10
 #
-%include	/usr/lib/rpm/macros.mono
 Summary:	Music player for GNOME
 Summary(pl.UTF-8):	Odtwarzacz muzyczny dla GNOME
 Name:		muine
